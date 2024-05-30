@@ -1,0 +1,2 @@
+(self.webpackChunkcatalunya_offline=self.webpackChunkcatalunya_offline||[]).push([[254],{47254:(a,e)=>{e.printMsg=function(){console.log("This is a message from the demo package")}}}]);
+//# sourceMappingURL=254.js.map
