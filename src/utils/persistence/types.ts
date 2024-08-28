@@ -3,5 +3,5 @@
 
 export type persistence = ({
   load <T>(key: string): Promise<T | undefined>,
-  save <T>(key: string, value: T): Promise<void>
+  save <T>(key: string, value: T): void
 });

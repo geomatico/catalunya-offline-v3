@@ -122,7 +122,11 @@ const useGeolocation = (): useGeolocationType => {
     };
     //console.debug('[Geolocation] Got Capacitor Geolocation', location);
     setError(undefined);
-    setGeolocation(geolocation);
+
+    // Don't take into account coarse locations, a minimal accuracy of 50m is required
+    if(location.accuracy < 50) {
+      setGeolocation(geolocation);
+    }
   };
 
   const handleWebError = (webError: GeolocationPositionError) => {
