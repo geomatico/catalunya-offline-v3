@@ -1,7 +1,12 @@
 import {registerPlugin} from '@capacitor/core';
 import {useEffect, useState} from 'react';
 import {CatOfflineError} from '../../types/commonTypes';
-import {BackgroundGeolocationPlugin, CallbackError, Location} from '@capacitor-community/background-geolocation';
+import {
+  BackgroundGeolocationPlugin,
+  CallbackError,
+  Location,
+  WatcherOptions
+} from '@capacitor-community/background-geolocation';
 import useIsActive from './useIsActive';
 import {IS_WEB} from '../../config';
 import {useTranslation} from 'react-i18next';
@@ -47,14 +52,14 @@ const nullGeolocation = () => ({
 });
 
 const useGeolocation = (): useGeolocationType => {
-  const [watcherId, setWatcherId] = useState<string>();
+  const [watcherPromise, setWatcherPromise] = useState<Promise<string>>();
   const [watchInBackground, setWatchInBackground] = useState<boolean>(false);
   const [error, setError] = useState<CatOfflineError>();
   const [geolocation, setGeolocation] = useState<Geolocation>(nullGeolocation);
   const isActive = useIsActive();
   const {t} = useTranslation();
 
-  const capacitorConfig = {
+  const capacitorConfig: WatcherOptions = {
     // backgroundMessage is required to guarantee a background location
     backgroundTitle: watchInBackground ? t('geolocation.backgroundTitle') : undefined,
     backgroundMessage: watchInBackground ? t('geolocation.backgroundMessage') : undefined,
@@ -124,7 +129,7 @@ const useGeolocation = (): useGeolocationType => {
     setError(undefined);
 
     // Don't take into account coarse locations, a minimal accuracy of 50m is required
-    if(location.accuracy < 50) {
+    if (location.accuracy < 50) {
       setGeolocation(geolocation);
     }
   };
@@ -156,35 +161,33 @@ const useGeolocation = (): useGeolocationType => {
     if (IS_WEB) {
       navigator.geolocation.getCurrentPosition(handleWebGeolocation, handleWebError, webConfig);
       const id = navigator.geolocation.watchPosition(handleWebGeolocation, handleWebError, webConfig);
-      setWatcherId(id.toString());
+      setWatcherPromise(Promise.resolve(id.toString()));
       //console.debug('[Geolocation] Started Web watching', id);
     } else {
-      BackgroundGeolocation.addWatcher(capacitorConfig, (capacitorGeolocation?: Location, capacitorError?: CallbackError) => {
-        if (capacitorError) {
-          handleCapacitorError(capacitorError);
-          handleCapacitorPermission(capacitorError);
-        } else if (capacitorGeolocation) {
-          handleCapacitorGeolocation(capacitorGeolocation);
-        }
-      }).then((id: string) => {
-        setWatcherId(id);
-        //console.debug('[Geolocation] Started Capacitor watching', id);
-      });
+      setWatcherPromise(
+        BackgroundGeolocation.addWatcher(capacitorConfig, (capacitorGeolocation?: Location, capacitorError?: CallbackError) => {
+          if (capacitorError) {
+            handleCapacitorError(capacitorError);
+            handleCapacitorPermission(capacitorError);
+          } else if (capacitorGeolocation) {
+            handleCapacitorGeolocation(capacitorGeolocation);
+          }
+        })
+      );
     }
   };
 
   const stopWatching = () => {
-    if (watcherId) {
-      if (IS_WEB) {
-        navigator.geolocation.clearWatch(Number(watcherId));
-        setWatcherId(undefined);
-        //console.debug('[Geolocation] Stopped Web watching', watcherId);
-      } else {
-        BackgroundGeolocation.removeWatcher({id: watcherId}).then(() => {
-          setWatcherId(undefined);
-          //console.debug('[Geolocation] Stopped Capacitor watching', watcherId);
-        });
-      }
+    if (watcherPromise !== undefined) {
+      setWatcherPromise(undefined);
+      watcherPromise.then((id) => {
+        if (IS_WEB) {
+          navigator.geolocation.clearWatch(Number(id));
+          //console.debug('[Geolocation] Stopped Web watching', watcherId);
+        } else {
+          BackgroundGeolocation.removeWatcher({id: id});
+        }
+      });
     }
   };
 
