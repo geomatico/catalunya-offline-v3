@@ -371,7 +371,7 @@ const MapView: FC<MapViewProps> = ({
   const handleContextualMenu = useCallback((menuId: string) => {
     menuId === 'settings'
       ? setSettingsDialogOpen(true)
-      : menuId === 'about' 
+      : menuId === 'about'
         ? setAboutDialogOpen(true)
         : undefined;
   }, []);
@@ -417,15 +417,19 @@ const MapView: FC<MapViewProps> = ({
     if (trackNavigation.isNavigating) return trackNavigation.navigateToFeature;
   }, [pointNavigation.isNavigating, trackNavigation.isNavigating, pointNavigation.navigateToFeature, trackNavigation.navigateToFeature]);
 
+  if (!isActive) {
+    return <>Not active!</>;
+  }
+
   return <>
-    {isActive && <SearchBoxAndMenu
+    <SearchBoxAndMenu
       onContextualMenuClick={handleContextualMenu}
       isHidden={isSearchBoxHidden}
       isContextualMenuOpen={isContextualMenuOpen}
       onToggleContextualMenu={handleToggleContextualMenu}
       onResultClick={handleResultClick}
       isHeaderVisible={editingPosition.isEditing || recordingTrack.isRecording}
-    />}
+    />
     {mapStyle && <MapComponent
       ref={mapRef}
       mapStyle={mapStyle}
@@ -442,7 +446,7 @@ const MapView: FC<MapViewProps> = ({
       onDblClick={handleDoubleClick}
       interactiveLayerIds={interactiveLayerIds}
     >
-      {!editingPosition.isEditing && isActive && <FabButton
+      {!editingPosition.isEditing && <FabButton
         isFabOpen={isFabOpen}
         onFabClick={toggleFabOpen}
         isFabHidden={isFabHidden}
@@ -462,7 +466,7 @@ const MapView: FC<MapViewProps> = ({
         geolocation={geolocation}
         navigateToLine={navigateToFeature}
         gpsPositionColor={gpsPositionColor}/>
-      {isActive && <LocationMarker geolocation={geolocation} heading={heading} color={gpsPositionColor}/>}
+      <LocationMarker geolocation={geolocation} heading={heading} color={gpsPositionColor}/>
       <PointMarkers points={pointList} defaultColor={scopeColor} onClick={selectPoint}/>
     </MapComponent>}
 
