@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkcatalunya_offline=self.webpackChunkcatalunya_offline||[]).push([[632],{14632:(e,n,s)=>{s.r(n),s.d(n,{ZipPluginWeb:()=>a});var o=s(16546);class a extends o.E_{constructor(){super({name:"ZipPlugin",platforms:["web"]})}zip(e){return console.log(e),Promise.resolve({path:e.destination})}unZip(e){return console.log(e),Promise.resolve({path:e.destination})}}}}]);
+//# sourceMappingURL=632.js.map
