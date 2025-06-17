@@ -1,7 +1,7 @@
 {
   "name": "catalunya-offline",
   "version": "3.2.3",
-  "description": "Catalunya Offline",
+  "description": "GR11 Offline",
   "main": "./dist/main.js",
   "scripts": {
     "test": "npm run lint && karma start karma.config.js",
@@ -100,6 +100,7 @@
     "karma-sourcemap-loader": "^0.4.0",
     "karma-webpack": "^5.0.1",
     "mapbox-gl": "npm:empty-npm-package@^1.0.0",
+    "maplibre-contour": "^0.1.0",
     "mocha": "^10.7.3",
     "moment": "^2.30.1",
     "moment-duration-format": "^2.3.2",

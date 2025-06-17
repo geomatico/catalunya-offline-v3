@@ -1,4 +1,4 @@
-package cat.icgc.catofflinev3;
+package es.geomatico.gr11offline;
 
 import com.getcapacitor.BridgeActivity;
 

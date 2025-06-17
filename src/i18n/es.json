@@ -1,6 +1,6 @@
 {
   "about": {
-    "content_01": "Catalunya Offline es la aplicación del Institut Cartogràfic i Geològic de Catalunya (ICGC) que te permite moverte por el territorio, tomar puntos y grabar rutas aunque no tengas cobertura de datos en tu móvil.",
+    "content_01": "GR11 Offline es la aplicación del Institut Cartogràfic i Geològic de Catalunya (ICGC) que te permite moverte por el territorio, tomar puntos y grabar rutas aunque no tengas cobertura de datos en tu móvil.",
     "content_02": "Puedes organizar tus puntos y trazas por ámbitos (geográficos o temáticos) y exportarlos para ser reutilizados en Instamaps y en otras aplicaciones.",
     "content_03": "La aplicación trabaja con la cartografia topográfica del ICGC (con y sin datos en vuestro móvil) y con la ortoimagen (solo si tienes datos).",
     "moreInfo": "Sobre el ICGC",
@@ -116,7 +116,7 @@
   "geolocation": {
     "backgroundMessage": "La localización permanecerá activa mientras se graban o siguen trazas",
     "backgroundTitle": "Geolocalización activa en segundo plano",
-    "requestPermission": "Catalunya Offline necesita acceder a la geolocalización, pero se ha denegado el permiso.\n\n¿Desea cambiar la configuración?"
+    "requestPermission": "GR11 Offline necesita acceder a la geolocalización, pero se ha denegado el permiso.\n\n¿Desea cambiar la configuración?"
   },
   "gpsAlert": {
     "message": "Es recomendable habilitar el gps para poder seguir",

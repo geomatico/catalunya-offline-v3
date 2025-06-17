@@ -49,8 +49,8 @@ const getTileFromDatabase = async (dbPath: string, z: number, x: number, y: numb
   if (queryresults?.values?.length === 1) { // Tile found
     const channel = new MessageChannel();
     decodeTileWorker.postMessage(queryresults.values[0].tile_data_hex, [channel.port2]);
-    return await new Promise((resolve) => channel.port1.onmessage = (e) => {
-      resolve(e.data.buffer);
+    return await new Promise<ArrayBuffer>((resolve) => channel.port1.onmessage = (e) => {
+      resolve(e.data.buffer as ArrayBuffer);
     });
   }
 };
@@ -110,5 +110,6 @@ const setDbPaths = async (paths: Record<string, string>) => {
 
 export {
   mbtiles,
-  setDbPaths
+  setDbPaths,
+  getTile
 };

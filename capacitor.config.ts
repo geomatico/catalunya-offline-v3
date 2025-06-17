@@ -6,8 +6,8 @@ const remoteDebug = process.env.LIVE_RELOAD_IP ? {
 } : {};
 
 const config: CapacitorConfig = {
-  appId: 'cat.icgc.catofflinev3',
-  appName: 'Catalunya Offline',
+  appId: 'es.geomatico.gr11offline',
+  appName: 'GR11 Offline',
   webDir: 'dist',
   server: {
     errorPath: 'unsupported.html',
@@ -16,7 +16,7 @@ const config: CapacitorConfig = {
   },
   ios: {
     contentInset: 'always', //https://forum.ionicframework.com/t/ios-notch-safe-area-inconsistent-behavior/203053/3
-    scheme: 'Catalunya Offline'
+    scheme: 'GR11 Offline'
   },
   android: {
     useLegacyBridge: true, // Needed for backround-location plugin to keep working after 5 minutes

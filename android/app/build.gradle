@@ -7,10 +7,10 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 
 android {
-    namespace 'cat.icgc.catofflinev3'
+    namespace 'es.geomatico.gr11offline'
     compileSdk rootProject.ext.compileSdkVersion
     defaultConfig {
-        applicationId "cat.icgc.catofflinev3"
+        applicationId "es.geomatico.gr11offline"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode appProperties.getProperty("versionCode").toInteger()

@@ -39,6 +39,7 @@ import useMapStyle from '../hooks/useMapStyle';
 import useIsActive from '../hooks/singleton/useIsActive';
 import Overlays from '../components/map/Overlays';
 import GpsDisabledAlert from '../components/common/GpsDisabledAlert';
+import { contourProtocol } from '../utils/contourProtocol';
 
 const HEADER_HEIGHT = 48;
 const SEARCHBOX_HEIGHT = 64;
@@ -48,6 +49,7 @@ const TRACK_NAVIGATION_BOTTOM_SHEET_HEIGHT = 283;
 const interactiveLayerIds = ['trackList'];
 
 mbtiles(maplibregl);
+contourProtocol(maplibregl);
 
 // This is a hack to apply the fix
 // https://github.com/mapbox/mapbox-gl-js/pull/4852/files#diff-3209d9864922146ac92cd50a2993cb7274ea92ffb28544ed574fa54ebbc23ef5

@@ -38,9 +38,20 @@ export const CalculateOfflineMapStyle = async (downloadStatus: downloadStatusTyp
             ]
           } as (VectorSource | RasterSource | RasterDemSource);
         } else {
-          sources[sourceId] = newStyle.sources[sourceId];
+          // Excepción para los contours
+          if (sourceId === 'contours' && mbtilesAssets.find(mb => mb.localPath.endsWith('terrain.mbtiles'))) {
+            sources[sourceId] = {
+              ...newStyle.sources[sourceId],
+              tiles: [
+                'contour://mbtiles://terrain/{z}/{x}/{y}.png'
+              ]
+            } as VectorSource;
+          } else {
+            sources[sourceId] = newStyle.sources[sourceId];
+          }
+
         }
-        
+
         return sources;
       }, {} as MapboxStyle['sources'])
     };
@@ -49,7 +60,7 @@ export const CalculateOfflineMapStyle = async (downloadStatus: downloadStatusTyp
     await setDbPaths(
       Object.fromEntries(
         Object.keys(newStyle.sources)
-          .map(sourceId => [sourceId, mbtilesAssets.find(mb => mb.localPath.endsWith(sourceId + '.mbtiles'))?.localPath])
+          .map(sourceId => [sourceId, mbtilesAssets.find(mb => mb.localPath.endsWith(sourceId === 'contours' ? 'terrain.mbtiles' : sourceId + '.mbtiles'))?.localPath])
           .filter(([,offlineAsset]) => offlineAsset !== undefined)
           .map(([sourceId, offlineAsset]) => ([sourceId, basePath + '/' + offlineAsset]))
       )

@@ -1,11 +1,11 @@
-# Catalunya Offline
+# GR11 Offline
 
 [![Frontend tests](https://github.com/OpenICGC/catalunya-offline-v3/actions/workflows/test-frontend.yml/badge.svg)](https://github.com/OpenICGC/catalunya-offline-v3/actions/workflows/test-frontend.yml)
 
 ## Informació
 
 </div>
-<p><strong>Catalunya Offline</strong> és una aplicació mòbil que us permet explorar el territori català, marcar punts d'interès i enregistrar les vostres rutes i excursions utilitzant el GPS, fins i tot en el cas que no hi hagi cobertura de dades al vostre dispositiu mòbil.</p><p>L'aplicació també permet la descàrrega i la visualització de la cartografia topogràfica de l'ICGC, que presenta la informació estructurada i jerarquitzada per facilitar-ne la lectura. S'hi mostren les corbes de nivell i informació relativa als senders de muntanya.</p>
+<p><strong>GR11 Offline</strong> és una aplicació mòbil que us permet explorar el territori català, marcar punts d'interès i enregistrar les vostres rutes i excursions utilitzant el GPS, fins i tot en el cas que no hi hagi cobertura de dades al vostre dispositiu mòbil.</p><p>L'aplicació també permet la descàrrega i la visualització de la cartografia topogràfica de l'ICGC, que presenta la informació estructurada i jerarquitzada per facilitar-ne la lectura. S'hi mostren les corbes de nivell i informació relativa als senders de muntanya.</p>
         </div>
 
 <div style="text-align: center;">
@@ -78,7 +78,7 @@ SENTRY_AUTH_TOKEN=
 The ADB command to explore the App filesystem in Android is:
 
 ```bash
-adb shell run-as cat.icgc.catofflinev3 ls -lha /data/user/0/cat.icgc.catofflinev3/files/offlineData
+adb shell run-as es.geomatico.gr11offline ls -lha /data/user/0/es.geomatico.gr11offline/files/offlineData
 ```
 
 ## Run in develompment mode

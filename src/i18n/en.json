@@ -1,6 +1,6 @@
 {
   "about": {
-    "content_01": "Catalunya Offline is an application from the Institut Cartogràfic i Geològic de Catalunya (ICGC) that lets you move across the territory, take points and record tracks even without mobile data coverage.",
+    "content_01": "GR11 Offline is an application from the Institut Cartogràfic i Geològic de Catalunya (ICGC) that lets you move across the territory, take points and record tracks even without mobile data coverage.",
     "content_02": "Points and tracks can be organized in scopes (geographic or thematic) and exported t be reused in Instamaps and other applications.",
     "content_03": "The application uses ICGC's topographic cartography (both online or offline) and with ortho imagery (online only).",
     "moreInfo": "About ICGC",
@@ -116,7 +116,7 @@
   "geolocation": {
     "backgroundMessage": "The geolocation will remain active while tracks are being followed or recorded",
     "backgroundTitle": "Background geolocation is active",
-    "requestPermission": "Catalunya Offline needs access to geolocation, but access has been denied.\n\nDo you want to change this setting?"
+    "requestPermission": "GR11 Offline needs access to geolocation, but access has been denied.\n\nDo you want to change this setting?"
   },
   "gpsAlert": {
     "message": "It is recommended to enable the gps to be able to continue",

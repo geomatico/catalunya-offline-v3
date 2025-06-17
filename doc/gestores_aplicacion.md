@@ -1,4 +1,4 @@
-# Catalunya Offline v3. Manual de gestores de aplicacion
+# GR11 Offline v3. Manual de gestores de aplicacion
 
 En este documento describiremos el proceso de publicación en las dos plataformas, ios e android.
 En todo momento se asume que se tiene preparado el entorno de desarrollo.
@@ -69,5 +69,3 @@ Al pulsar en **Distribute app** se nos abrirá la siguiente ventana:
 Y seleccionamos **Testflight y AppStore**. Esto firmará nuestra app y la subirá a AppStore sin publicar, pero sí estará disponible para nuestro grupo de testeo en testflight.
 
 Para publicar la app se hace directamente desde la web de [AppStoreConnect](https://appstoreconnect.apple.com/).
-
-

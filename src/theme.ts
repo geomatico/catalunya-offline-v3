@@ -1,6 +1,6 @@
 import createTheme from '@mui/material/styles/createTheme';
 
-export const primaryColor = '#f59d21';
+export const primaryColor = '#cc0000';
 
 const theme = createTheme({
   palette: {
@@ -10,7 +10,7 @@ const theme = createTheme({
       contrastText: '#fff',
     },
     secondary: {
-      main: '#ffd300',
+      main: '#fff',
     },
     text: {
       primary: '#000000',

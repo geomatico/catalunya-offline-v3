@@ -55,10 +55,10 @@ export const COLOR_PALETTES = [
   [paletteName]: useColorRamp(paletteName).hexColors
 }), {});
 
-const DATASET: 'icgc' | 'mtc25m' | 'catalunya' | 'madrid' | 'vigo' | 'galicia' = 'icgc';
+const DATASET: 'icgc' | 'mtc25m' | 'catalunya' | 'madrid' | 'vigo' | 'galicia' | 'gr11' = 'gr11';
 
-//const BASE_URL = `https://cdn.geomatico.es/datasets/${DATASET}`;
-const BASE_URL = 'https://datacloud.icgc.cat/datacloud/catalunya-offline';
+const BASE_URL = `https://cdn.geomatico.es/catoffline/${DATASET}`;
+//const BASE_URL = 'https://datacloud.icgc.cat/datacloud/catalunya-offline';
 
 const LATITUDES: Record<string, number> = {
   icgc: 40.5,
@@ -66,7 +66,8 @@ const LATITUDES: Record<string, number> = {
   catalunya: 40.5,
   madrid: 40.417,
   vigo: 42.236,
-  galicia: 42.755
+  galicia: 42.755,
+  gr11: (42.563071 + 42.706014) / 2
 };
 
 const LONGITUDES: Record<string, number> = {
@@ -75,7 +76,8 @@ const LONGITUDES: Record<string, number> = {
   catalunya: 1.6,
   madrid: -3.703,
   vigo: -8.727,
-  galicia: -7.866
+  galicia: -7.866,
+  gr11: (-0.155588 + 1.163048) / 2
 };
 
 export const DEFAULT_VIEWPORT: ViewportType = {
@@ -107,16 +109,16 @@ export const OFFLINE_DATASOURCES: OfflineDatasources = [{
 export const OFFLINE_GLYPHS = `${BASE_URL}/glyphs.zip`;
 
 export const BASEMAPS: BaseMaps = [{
-  id: 'estandard',
+  id: 'gr11',
   labels: {
-    ca: 'Estàndard',
-    en: 'Standard',
-    es: 'Estándar'
+    ca: 'GR-11',
+    en: 'GR-11',
+    es: 'GR-11'
   },
-  style: `${BASE_URL}/estandard.json`,
+  style: `${BASE_URL}/style.json`,
   thumbnail: `${BASE_URL}/thumbnail-estandard.png`,
-  sprites: `${BASE_URL}/sprites-estandard.zip`,
-  attribution: 'Institut Cartogràfic i Geològic de Catalunya (Resta del món © OpenStreetMap contributors)'
+  sprites: `${BASE_URL}/sprites-gr11.zip`,
+  attribution: 'Yolo yolo'
 },{
   id: 'lleure',
   labels: {
@@ -127,18 +129,7 @@ export const BASEMAPS: BaseMaps = [{
   style: `${BASE_URL}/lleure.json`,
   thumbnail: `${BASE_URL}/thumbnail-lleure.png`,
   sprites: `${BASE_URL}/sprites-lleure.zip`,
-  attribution: 'Institut Cartogràfic i Geològic de Catalunya (Resta del món © OpenStreetMap contributors)'
-},{
-  id: 'ortofoto',
-  labels: {
-    ca: 'Ortofoto (només online)',
-    en: 'Ortophoto (online only)',
-    es: 'Ortofoto (solo online)'
-  },
-  style: 'https://geoserveis.icgc.cat/contextmaps/icgc_orto_estandard.json',
-  thumbnail: `${BASE_URL}/thumbnail-ortofoto.png`,
-  maxZoom: 18,
-  attribution: 'Institut Cartogràfic i Geològic de Catalunya - Esri, DigitalGlobe, USDA, USGS, GeoEye, Getmapping, AeroGRID, IGN, IGP, UPR-EGP, and the GIS community - © OpenMapTiles © OpenStreetMap contributors'
+  attribution: 'Yolo yolo'
 }];
 
-export const DEFAULT_BASEMAP_ID = 'lleure';
+export const DEFAULT_BASEMAP_ID = 'gr11';

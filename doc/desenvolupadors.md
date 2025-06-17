@@ -1,4 +1,4 @@
-# Catalunya Offline v3. Manual per a desenvolupadors
+# GR11 Offline v3. Manual per a desenvolupadors
 
 En essència es tracta d'un desenvolupament frontend Javascript que s'encapsula i distrubueix com Apps natives gràcies a Capacitor. 
 
@@ -119,7 +119,7 @@ Al directori base de `src/` hi tenim fitxers de configuració propis de l'aplica
 * `allowJavascriptModules.ts`: Una 'trampa' per poder importar mòduls no typescript a projectes typescript (altres formats d'arxiu, o javascript sense tipar). No fer servir per a codi propi, que sempre haurà d'anar ben tipat.
 * `test.ts` especifica quins fitxers incloure al bundle de test (`*.spec.*`).
 * `theme.ts` el tema de Material UI que s'aplicarà a tot el projecte.
-* `config.ts` variables de configuració propis de Catalunya Offline.
+* `config.ts` variables de configuració propis de GR11 Offline.
 * `template.html` i `index.tsx` són els punts d'entrada al projecte.
 
 
@@ -189,7 +189,7 @@ També se'n poden definir de propis. D'aquesta manera podem reutilitzar blocs de
 
 També existeixen llibreries de hooks de tercers per fer tot tipus d'operacions, moltes vegades servint com a "wrappers" per a React de funcionalitats o llibreries existents.
 
-A Catalunya Offline, per exemple, se'n fa servir molt un dit "useSingletonHook" per compartir una mateixa instància de hook entre tots els components. Així, hooks com "useGeolocation" o "useViewport" comparteixen la mateixa localització o viewport entre diferents components de l'aplicació (funcionaria similar a un context de react). Tots els settings, per exemple, també son 'singleton'.
+A GR11 Offline, per exemple, se'n fa servir molt un dit "useSingletonHook" per compartir una mateixa instància de hook entre tots els components. Així, hooks com "useGeolocation" o "useViewport" comparteixen la mateixa localització o viewport entre diferents components de l'aplicació (funcionaria similar a un context de react). Tots els settings, per exemple, també son 'singleton'.
 
 
 ### Views (integracions)
@@ -338,7 +338,7 @@ const allUserLayers = userLayersStore.list();
 
 ### Loaders
 
-Un Loader exposa una interfície molt simple i compatible amb la que dóna la lliberia `loaders.gl`, que a més és fàcilment integrable amb el `FilePicker` que usem a Catalunya Offline per llegir fitxers del dispositiu:
+Un Loader exposa una interfície molt simple i compatible amb la que dóna la lliberia `loaders.gl`, que a més és fàcilment integrable amb el `FilePicker` que usem a GR11 Offline per llegir fitxers del dispositiu:
 
 ```typescript
 export interface IGeodataLoader {
@@ -348,7 +348,7 @@ export interface IGeodataLoader {
 
 Hi ha una funció `load` que, donat un contingut binari, retorna una promesa de FeatureCollection. El contingut binari pot ser un Data Url o un Blob.
 
-Catalunya Offline implementa loaders per a CSV, GeoJSON, GPX, KML i SHP+ZIP. En el cas de dataUrls, que és el format que s'ha de fer servir en Android i iOS, la longitud màxima del fitxer serialitzat en base64 és de 32 MB. Això suposa una limitació i ve imposat per com Capacitor implementa la comunicació entre els plugins i javascript.
+GR11 Offline implementa loaders per a CSV, GeoJSON, GPX, KML i SHP+ZIP. En el cas de dataUrls, que és el format que s'ha de fer servir en Android i iOS, la longitud màxima del fitxer serialitzat en base64 és de 32 MB. Això suposa una limitació i ve imposat per com Capacitor implementa la comunicació entre els plugins i javascript.
 
 ### Importers
 
