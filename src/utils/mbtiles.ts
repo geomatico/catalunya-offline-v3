@@ -56,7 +56,18 @@ const getTileFromDatabase = async (dbPath: string, z: number, x: number, y: numb
 };
 
 const openConnection = async (dbName: string) => {
-  const connection = await sqlite.createNCConnection(dbName, 1);
+  if (dbConnections.get(dbName)) {
+    return; // Already set
+  }
+
+  const isConsistent = (await sqlite.checkConnectionsConsistency()).result;
+  const isConnected = (await sqlite.isNCConnection(dbName)).result;
+  let connection: SQLiteDBConnection;
+  if (isConsistent && isConnected) {
+    connection = await sqlite.retrieveNCConnection(dbName);
+  } else {
+    connection = await sqlite.createNCConnection(dbName, 1);
+  }
   //console.log('[mbtiles] Opening...');
   await connection.open();
   //console.log('[mbtiles] Opened...');
