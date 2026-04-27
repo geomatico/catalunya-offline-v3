@@ -91,8 +91,12 @@ const mbtiles = (ml: typeof maplibregl) => {
 };
 
 const setDbPaths = async (paths: Record<string, string>) => {
-  await Promise.all(Object.values(dbPaths).map(path => sqlite.closeNCConnection(path))); // Close old connections
-  // console.log('[mbtiles] All connections closed');
+  try {
+    await Promise.all(Object.values(dbPaths).map(path => sqlite.closeNCConnection(path))); // Close old connections
+  } finally {
+    console.log('[mbtiles] All connections closed');
+  }
+
   dbPaths = paths;
   await Promise.all(Object.values(dbPaths).map(path =>
     openConnection(path)
