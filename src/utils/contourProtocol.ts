@@ -6,6 +6,7 @@ import {
   GlobalContourTileOptions,
   IndividualContourTileOptions
 } from 'maplibre-contour/dist/types';
+import { HeightTile } from 'maplibre-contour/dist/height-tile';
 
 const managers: Record<string, DemManager> = {};
 
@@ -13,22 +14,27 @@ const getManager = (base: string) => {
   if(!managers[base]) {
     const getTile = base.startsWith('mbtiles') ? async (url: string) => {
       const tileBuffer = await getMbtile(url);
-      if (!tileBuffer) {
-        throw new Error(`Error getting tile for ${url}`);
-      }
-      return {
-        data: new Blob([tileBuffer])
-      };
+      if (!tileBuffer) throw new Error(`No tile: ${url}`);
+      return { data: new Blob([tileBuffer]) };
     } : undefined;
 
-    managers[base] = new mlcontour.LocalDemManager({
-      demUrlPattern: `${base}/{z}/{x}/{y}.png`, // This is the URL of the DEM tiles
+    const demManager = new mlcontour.LocalDemManager({
+      demUrlPattern: `${base}/{z}/{x}/{y}.png`,
       cacheSize: 100,
       encoding: 'mapbox',
       maxzoom: 14,
       timeoutMs: 10000,
       getTile
     });
+
+    // Missing neighbor tiles at coverage edges should resolve to undefined so
+    // HeightTile.combineNeighbors can still build contours from available neighbors,
+    // matching how out-of-bounds tiles are handled (local-dem-manager.ts:189).
+    const origFetchDem = demManager.fetchDem.bind(demManager);
+    demManager.fetchDem = (...args: Parameters<typeof demManager.fetchDem>) =>
+      origFetchDem(...args).catch(() => undefined as unknown as HeightTile);
+
+    managers[base] = demManager;
   }
   return managers[base];
 };
@@ -82,14 +88,9 @@ const contourProtocol = (ml: typeof maplibregl) => {
     const base = splitUrl.slice(2, -3).join('/');
 
     const manager = getManager(base);
-    manager.fetchContourTile(z, x, y, getOptionsForZoom(globalContourTileOptions, z), new AbortController()).then((tile) => {
-      try {
-        callback(null, tile.arrayBuffer);
-      } catch {
-        console.info('[contourProtocol] No data');
-        //callback();
-      }
-    });
+    manager.fetchContourTile(z, x, y, getOptionsForZoom(globalContourTileOptions, z), new AbortController())
+      .then((tile) => callback(null, tile.arrayBuffer.slice(0)))
+      .catch(() => callback(null, new ArrayBuffer(0)));
 
     return {
       cancel: () => undefined
